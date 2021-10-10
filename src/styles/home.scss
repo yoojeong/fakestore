@@ -1,0 +1,36 @@
+@media screen and (max-width: 760px) {
+  .landing-msg {
+    font-size: 28px;
+  }
+}
+
+.envelope {
+  width: 200px;
+  height: 200px;
+
+  background-image: url(https://pngimg.com/uploads/envelope/envelope_PNG18366.png);
+  background-size: cover;
+  background-position: center;
+
+  margin: 200px auto 0px auto;
+
+  cursor: pointer;
+}
+
+.landing-msg {
+  text-align: center;
+  padding: 40px 0px;
+}
+
+.info {
+  width: 60%;
+  margin: auto;
+  padding: 0px 100px;
+  text-align: center;
+}
+
+.landing-img {
+  margin: 30px auto;
+  display: block;
+  width: 60%;
+}
