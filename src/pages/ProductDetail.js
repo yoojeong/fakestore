@@ -1,27 +1,15 @@
 import React from "react";
+import { useLocation } from 'react-router-dom';
 import '../styles/productdetail.scss';
 
-function ProductDetail(props) {
-  const { product } = props;
+function ProductDetail() {
+  const location = useLocation();
+  const item = location.state.product;
+
   return (
-    <div className="product-card">
-      <div>
-        <div>
-          <figure className="product-img">
-            <img
-              src={product.image}
-              alt={product.description}
-            />
-          </figure>
-        </div>
-        <div className="media-content">
-          <b>
-            {product.title}
-          </b>
-          <span className="product-price">${product.price}</span>
-          <div>{product.description}</div>
-        </div>
-      </div>
+    <div className="product-detail">
+      {item.title}
+      Inside detail!
     </div>
   );
 }

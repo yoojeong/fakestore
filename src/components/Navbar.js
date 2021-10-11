@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import ContactUs from "../pages/ContactUs";
 import Home from "../pages/Home";
+import ProductDetail from "../pages/ProductDetail";
 import ProductsView from "../pages/ProductsView";
 import '../styles/navbar.scss';
 
@@ -33,6 +34,9 @@ function Navbar(props) {
           </Route>
           <Route path="/contactUs">
             <ContactUs />
+          </Route>
+          <Route path='/productDetail'>
+            <ProductDetail />
           </Route>
         </Switch>
       </div>

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import '../styles/products.scss';
-import ProductDetail from "./ProductDetail";
+import ProductCard from "../components/ProductCard";
+import '../styles/productsview.scss';
 
 function ProductsView() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
+  const [category, setCategory] = useState("");
 
   // the empty deps array [] means this useEffect will run once
+  // similar to componentDidMount()
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then(res => res.json())
@@ -26,39 +28,66 @@ function ProductsView() {
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <h1 className="products-loading">Loading...</h1>;
   } else {
+    function handleChangeCategory(event) {
+      setCategory(event.target.value);
+    }
+
     return (
-      // <div>Products
-      //   <ul>
-      //     {items.map(item => (
-      //       <li key={item.id}>
-      //         {item.name} {item.price}
-      //       </li>
-      //     ))}
-      //   </ul>
-      // </div>
       <div>
-        <div className="products-title">
-          <h4>Products</h4>
+        <h1 className="products-title">Products</h1>
+
+        <div className="sort">
+          <div className="collection-sort">
+            <label>Filter by:</label>
+            <select value={category} onChange={handleChangeCategory}>
+              <option value="">Select</option>
+              <option value="men's clothing">men's clothing</option>
+              <option value="jewelery">jewelery</option>
+              <option value="electronics">electronics</option>
+              <option value="women's clothing">women's clothing</option>
+            </select>
+          </div>
+
+          <div className="collection-sort">
+            <label>Sort by:</label>
+            <select>
+              <option value="/">Featured</option>
+            </select>
+          </div>
         </div>
-        <br />
+
         <div className="products-list">
           {items && items.length ? (
-            items.map((item, index) => (
-              <ProductDetail
-                product={item}
-                key={index}
-              />
-            ))
+            items
+              .filter(
+                (item) =>
+                  category === item.category || category === ""
+              )
+              .map((item, index) => (
+                <ProductCard
+                  key={index}
+                  product={item}
+                />
+              ))
+
+            // without filter by category
+            // items.map((item, index) => (
+            //   <ProductCard
+            //     product={item}
+            //     key={index}
+            //   />
+            // ))
           ) : (
-            <div className="nothing">
+            <div className="products-not-found">
               <span>
                 No products found!
               </span>
             </div>
           )}
         </div>
+
       </div>
     );
   }
