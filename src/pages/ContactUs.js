@@ -5,7 +5,7 @@ import '../styles/contactus.scss';
 function ContactUs(props) {
   return (
     <div>
-      <h1 className="contact-us">Contact Us</h1>
+      <h1 className="page-title">Contact Us</h1>
       <h5 className="contact-us-desc">Questions not answered? We're here to help!</h5>
 
       <div className="contact-methods">
