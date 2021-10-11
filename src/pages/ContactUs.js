@@ -25,8 +25,6 @@ function ContactUs(props) {
           <p>contact-us@fakestore.com</p>
         </div>
       </div>
-
-
     </div>
   );
 }

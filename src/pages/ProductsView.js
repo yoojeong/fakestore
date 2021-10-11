@@ -1,37 +1,65 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import '../styles/products.scss';
+import ProductDetail from "./ProductDetail";
 
-class ProductsView extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      error: null,
-      isLoaded: false,
-      items: []
-    };
-  }
+function ProductsView() {
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [items, setItems] = useState([]);
 
-  componentDidMount() {
+  // the empty deps array [] means this useEffect will run once
+  useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({
-            isLoaded: true,
-            items: result.items
-          });
+          setIsLoaded(true);
+          setItems(result);
         },
         (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
+          setIsLoaded(true);
+          setError(error);
         }
       )
-  }
+  }, [])
 
-  render() {
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  } else if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else {
     return (
-      <div>Products</div>
+      // <div>Products
+      //   <ul>
+      //     {items.map(item => (
+      //       <li key={item.id}>
+      //         {item.name} {item.price}
+      //       </li>
+      //     ))}
+      //   </ul>
+      // </div>
+      <div>
+        <div className="products-title">
+          <h4>Products</h4>
+        </div>
+        <br />
+        <div className="products-list">
+          {items && items.length ? (
+            items.map((item, index) => (
+              <ProductDetail
+                product={item}
+                key={index}
+              />
+            ))
+          ) : (
+            <div className="nothing">
+              <span>
+                No products found!
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
     );
   }
 }
