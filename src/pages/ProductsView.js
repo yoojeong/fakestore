@@ -38,55 +38,48 @@ function ProductsView() {
       <div>
         <h1 className="page-title">Products</h1>
 
-        <div className="flex-wrapper">
-
-
-
-          <div className="filter-wrapper">
-            <div className="filter">
-              <label>Filter by:</label>
-              <select value={category} onChange={handleChangeCategory}>
-                <option value="">Select</option>
-                <option value="men's clothing">men's clothing</option>
-                <option value="jewelery">jewelery</option>
-                <option value="electronics">electronics</option>
-                <option value="women's clothing">women's clothing</option>
-              </select>
-            </div>
+        <div className="filter-wrapper">
+          <div className="filter">
+            <label>Filter by:</label>
+            <select value={category} onChange={handleChangeCategory}>
+              <option value="">Select</option>
+              <option value="men's clothing">men's clothing</option>
+              <option value="jewelery">jewelery</option>
+              <option value="electronics">electronics</option>
+              <option value="women's clothing">women's clothing</option>
+            </select>
           </div>
-
-          <div className="products-list">
-            {items && items.length ? (
-              items
-                .filter(
-                  (item) =>
-                    category === item.category || category === ""
-                )
-                .map((item, index) => (
-                  <ProductCard
-                    key={index}
-                    product={item}
-                  />
-                ))
-
-              // without filter by category
-              // items.map((item, index) => (
-              //   <ProductCard
-              //     product={item}
-              //     key={index}
-              //   />
-              // ))
-            ) : (
-              <div className="products-not-found">
-                <span>
-                  No products found!
-                </span>
-              </div>
-            )}
-          </div>
-
         </div>
 
+        <div className="products-list">
+          {items && items.length ? (
+            items
+              .filter(
+                (item) =>
+                  category === item.category || category === ""
+              )
+              .map((item, index) => (
+                <ProductCard
+                  key={index}
+                  product={item}
+                />
+              ))
+
+            // without filter by category
+            // items.map((item, index) => (
+            //   <ProductCard
+            //     product={item}
+            //     key={index}
+            //   />
+            // ))
+          ) : (
+            <div className="products-not-found">
+              <span>
+                No products found!
+              </span>
+            </div>
+          )}
+        </div>
       </div>
     );
   }

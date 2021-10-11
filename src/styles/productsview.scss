@@ -15,20 +15,13 @@
 }
 
 .filter-wrapper {
-  margin: 15px 0px;
+  margin: 20px 15px 0px;
+  text-align: center;
 
   .filter{
 
     label {
       margin: 5px;
     }
-
   }
-}
-
-.flex-wrapper {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
 }
